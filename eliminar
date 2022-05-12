@@ -1,0 +1,35 @@
+@Override
+    public T eliminar(int indice) {
+        if (indice < 0 || indice >= longitud) { // En el caso de que no haya nada.
+
+            return null;
+
+        } else {
+
+            NodoGenerico<T> temporal2; // Puntero de anclaje.
+
+            if (indice == longitud - 1) { // En el caso de que estemos quitando la cola.
+
+                temporal2 = cola; // Fijamos Temporal2 a la cola.
+                cola = temporal2.getSig(); // Ahora, la cola es su siguiente.
+
+            } else { // Quitamos de la cola en adelante.
+
+                NodoGenerico<T> puntero = cola; // Puntero de recorrido.
+
+                for (int i = 0; i < longitud - indice - 2; i++) { // En el caso de que estemos quitando cualquiera.
+                    puntero = puntero.getSig(); // Avanzamos un nodo.
+                }
+
+                temporal2 = puntero.getSig(); // Asignamos el puntero de anclaje al siguiente nodo del puntero, el cual, queremos devolver.
+                puntero.setSig(temporal2.getSig()); // Cortamos y reasignamos los nodos.
+
+            }
+
+            temporal2.setSig(null); // Cortamos el enlace con el siguiente nodo.
+
+            longitud--; // Decrementamos el tamaño de la lista.
+
+            return temporal2.getValor(); // Devolvemos el valor del nodo eliminado.
+        }
+    }
